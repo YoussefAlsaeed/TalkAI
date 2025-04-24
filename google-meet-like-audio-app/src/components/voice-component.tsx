@@ -15,6 +15,7 @@ interface VoiceChatProps {
   const [hasPermission, setHasPermission] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+
   const conversation = useConversation({
     onConnect: () => {
       console.log("Connected to ElevenLabs");
@@ -33,6 +34,11 @@ interface VoiceChatProps {
       message.error(msg);
       console.error("Error:", error);
     },
+    onUserSpeaking: (speaking: boolean) => {
+        if (onSpeakingChange) {
+          onSpeakingChange(!speaking); 
+        }
+      },
   });
 
   const { status, isSpeaking } = conversation;
@@ -83,22 +89,22 @@ interface VoiceChatProps {
 
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+    <div className="w-full flex justify-center p-5">
       <Card
-        title="Voice Chat"
-        style={{ maxWidth: 400, width: "100%" }}
-
+        className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg"
+        title={
+          <span className="text-white text-xl font-semibold">Voice Chat</span>
+        }
+        headStyle={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}
+        bodyStyle={{ padding: '20px' }}
       >
-        <Space
-          direction="vertical"
-          style={{ width: "100%", textAlign: "center" }}
-        >
+        <Space direction="vertical" className="w-full text-center">
           {status === "connected" ? (
             <Button
               type="primary"
               danger
               onClick={handleEndConversation}
-              style={{ width: "100%" }}
+              className="w-full bg-red-500 hover:bg-red-600 border-none h-12"
               icon={<StopOutlined />}
             >
               End Conversation
@@ -108,7 +114,7 @@ interface VoiceChatProps {
               type="primary"
               onClick={handleStartConversation}
               disabled={!hasPermission}
-              style={{ width: "100%" }}
+              className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 border-none h-12"
               icon={<PhoneOutlined />}
             >
               Start Conversation
@@ -116,13 +122,15 @@ interface VoiceChatProps {
           )}
 
           {status === "connected" && (
-            <Text type="success">
-              {isSpeaking ? "Agent is speaking..." : "Listening..."}
+            <Text className="text-white/80">
+              {isSpeaking ? "Alexis is speaking..." : "Listening..."}
             </Text>
           )}
-          {errorMessage && <Text type="danger">{errorMessage}</Text>}
+          {errorMessage && (
+            <Text className="text-red-400">{errorMessage}</Text>
+          )}
           {!hasPermission && (
-            <Text type="warning">
+            <Text className="text-yellow-400">
               Please allow microphone access to use voice chat
             </Text>
           )}
