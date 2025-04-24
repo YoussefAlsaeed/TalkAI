@@ -113,7 +113,7 @@ The project uses a Supabase Edge Function (`post-call-webhook`) to process Eleve
 supabase functions new post-call-webhook
 ```
 
-2. Replace the contents of `supabase/functions/post-call-webhook/index.ts` with the provided [Edge Function code](https://github.com/YoussefAlsaeed/TalkAI/blob/main/supabase/functions/convo-callback/index.ts) :
+2. Replace the contents of `supabase/functions/post-call-webhook/index.ts` with the provided [Edge Function code](https://github.com/YoussefAlsaeed/TalkAI/blob/main/supabase/functions/convo-callback/index.ts):
 
 #### Configure Environment Variables
 
@@ -144,6 +144,8 @@ supabase functions deploy post-call-webhook
 ```
 
 2. Verify the function is deployed in the Supabase dashboard (**Edge Functions**).
+
+3. Disable the "Enfore JWT Authentication" option.
 
 ### 7. Run the Project Locally
 
