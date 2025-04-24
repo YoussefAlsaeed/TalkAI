@@ -170,7 +170,7 @@ npm run dev
 
 #### Deploy Supabase
 
-1. Ensure the database schema and Edge Function are deployed (see [Set Up Supabase](#set-up-supabase) and [Set Up Supabase Edge Function](#set-up-supabase-edge-function)).
+1. Ensure the database schema and Edge Function are deployed .
 2. Update the ElevenLabs webhook URL to the deployed Edge Function URL (`https://<project-ref>.functions.supabase.co/post-call-webhook`).
 
 ## References
